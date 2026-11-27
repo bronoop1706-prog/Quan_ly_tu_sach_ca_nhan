@@ -1,4 +1,5 @@
-﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
 @{
     var antiForgeryToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
     var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
@@ -23,7 +24,42 @@
     <link rel="stylesheet" href="~/vendor/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/core-theme.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
+
+    <!-- S22: Kích thước icon SVG dùng chung trong Portal -->
+    <style>
+        .portal-nav-icon {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            margin-right: 5px;
+            object-fit: contain;
+            vertical-align: -3px;
+        }
+
+        .portal-logo-icon {
+            display: block;
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .portal-shelf-icon {
+            display: block;
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .portal-ai-icon {
+            display: inline-block;
+            width: 19px;
+            height: 19px;
+            object-fit: contain;
+            vertical-align: middle;
+        }
+    </style>
 </head>
+
 <body data-portal-palette="blue">
 
     <!-- 1. HEADER CỔNG DỊCH VỤ BOOKSHARE PORTAL -->
@@ -31,51 +67,120 @@
         <div class="portal-utility-bar">
             <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div class="d-flex align-items-center gap-2 flex-wrap">
-                    <a asp-controller="Home" asp-action="Index"><i class="bi bi-compass me-1"></i>Portal</a>
+
+                    <a asp-controller="Home" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/dashboard.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />Portal
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S01AuthOtpGoogle" asp-action="Index"><i class="bi bi-shield-lock me-1"></i>S01. Auth/OTP</a>
+
+                    <a asp-controller="S01AuthOtpGoogle" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/shield.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S01. Auth/OTP
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S02PersonalShelf" asp-action="Index"><i class="bi bi-bookshelf me-1"></i>S02. Tủ Sách</a>
+
+                    <a asp-controller="S02PersonalShelf" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/library.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S02. Tủ Sách
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S03ReadingTracker" asp-action="Index"><i class="bi bi-pie-chart-fill me-1"></i>S03. Tiến Độ</a>
+
+                    <a asp-controller="S03ReadingTracker" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/chart.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S03. Tiến Độ
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S04BookNotesQuotes" asp-action="Index"><i class="bi bi-journal-richtext me-1"></i>S04. Ghi Chú & Quotes</a>
+
+                    <a asp-controller="S04BookNotesQuotes" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/audit.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S04. Ghi Chú & Quotes
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S05IsbnAutoCatalog" asp-action="Index"><i class="bi bi-upc-scan me-1"></i>S05. Quét ISBN</a>
+
+                    <a asp-controller="S05IsbnAutoCatalog" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/book-open.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S05. Quét ISBN
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S06SearchDiscovery" asp-action="Index"><i class="bi bi-funnel-fill me-1"></i>S06. Tìm Kiếm</a>
+
+                    <a asp-controller="S06SearchDiscovery" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/settings.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S06. Tìm Kiếm
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S07LibraryCatalog" asp-action="Index"><i class="bi bi-buildings-fill me-1"></i>S07. Kho Thư Viện</a>
+
+                    <a asp-controller="S07LibraryCatalog" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/library.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S07. Kho Thư Viện
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S08LibraryLoanFlow" asp-action="Index"><i class="bi bi-journal-arrow-down me-1"></i>S08. Mượn Kho Chung</a>
+
+                    <a asp-controller="S08LibraryLoanFlow" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/loan.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S08. Mượn Kho Chung
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S09P2PLoanFlow" asp-action="Index"><i class="bi bi-people-fill me-1"></i>S09. Mượn P2P</a>
+
+                    <a asp-controller="S09P2PLoanFlow" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/users.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S09. Mượn P2P
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S10ConditionReport" asp-action="Index"><i class="bi bi-camera-fill me-1"></i>S10. Đối Chiếu Ảnh</a>
+
+                    <a asp-controller="S10ConditionReport" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/audit.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S10. Đối Chiếu Ảnh
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S11HotBookQueue" asp-action="Index"><i class="bi bi-fire me-1"></i>S11. Hàng Chờ Sách Hot</a>
+
+                    <a asp-controller="S11HotBookQueue" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/gem.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S11. Hàng Chờ Sách Hot
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S12LoanRenewalFine" asp-action="Index"><i class="bi bi-calendar2-plus-fill me-1"></i>S12. Gia Hạn & Phí Trễ</a>
+
+                    <a asp-controller="S12LoanRenewalFine" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/coins.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S12. Gia Hạn & Phí Trễ
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S13GeminiAiAssistant" asp-action="Index"><i class="bi bi-robot me-1"></i>S13. Trợ Lý AI RAG</a>
+
+                    <a asp-controller="S13GeminiAiAssistant" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/robot.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S13. Trợ Lý AI RAG
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S14AiRecommendation" asp-action="Index"><i class="bi bi-magic me-1"></i>S14. Gợi Ý Sách AI</a>
+
+                    <a asp-controller="S14AiRecommendation" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/palette.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S14. Gợi Ý Sách AI
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S15TrustScoreReview" asp-action="Index"><i class="bi bi-star-half me-1"></i>S15. Đánh Giá & TrustScore</a>
+
+                    <a asp-controller="S15TrustScoreReview" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/shield.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S15. Đánh Giá & TrustScore
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S16MembershipTier" asp-action="Index"><i class="bi bi-gem me-1"></i>S16. Gói Thành Viên</a>
+
+                    <a asp-controller="S16MembershipTier" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/gem.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S16. Gói Thành Viên
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S17SandboxPayment" asp-action="Index"><i class="bi bi-credit-card-2-front-fill me-1"></i>S17. Cổng Sandbox HMAC</a>
+
+                    <a asp-controller="S17SandboxPayment" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/wallet.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S17. Cổng Sandbox HMAC
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S18NotificationHub" asp-action="Index"><i class="bi bi-bell-fill me-1"></i>S18. Thông Báo & Resend</a>
+
+                    <a asp-controller="S18NotificationHub" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/calendar.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S18. Thông Báo & Resend
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S19DisputeResolution" asp-action="Index"><i class="bi bi-gavel me-1"></i>S19. Tranh Chấp</a>
+
+                    <a asp-controller="S19DisputeResolution" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/lock.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S19. Tranh Chấp
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S20ExchangeHubClub" asp-action="Index"><i class="bi bi-geo-alt-fill me-1"></i>S20. Trạm CLB/Hub</a>
+
+                    <a asp-controller="S20ExchangeHubClub" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/roles.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S20. Trạm CLB/Hub
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S21LibrarianDesk" asp-action="Index"><i class="bi bi-upc-scan me-1"></i>S21. Bàn Thủ Thư</a>
+
+                    <a asp-controller="S21LibrarianDesk" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/unlock.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S21. Bàn Thủ Thư
+                    </a>
                     <span class="opacity-50">|</span>
-                    <a asp-controller="S22AdminAnalytics" asp-action="Index"><i class="bi bi-speedometer2 me-1"></i>S22. Quản Trị Admin</a>
+
+                    <a asp-controller="S22AdminAnalytics" asp-action="Index">
+                        <img src="@Url.Content("~/icons/s22-admin/chart.svg")" class="portal-nav-icon" alt="" aria-hidden="true" />S22. Quản Trị Admin
+                    </a>
                 </div>
 
                 <div class="d-flex align-items-center gap-2 flex-wrap">
@@ -84,8 +189,10 @@
                         <button type="button" class="btn btn-xs btn-warning text-dark fw-bold" data-set-palette="coral">Cam Portal</button>
                         <button type="button" class="btn btn-xs btn-success text-white fw-bold" data-set-palette="emerald">Xanh Thư Viện</button>
                     </div>
+
                     <span class="badge bg-warning text-dark"><i class="bi bi-award-fill me-1"></i>TrustScore: @currentTrust</span>
                     <span class="badge bg-light text-dark">Role: @currentRole</span>
+
                     @if (isAuthenticated)
                     {
                         <a asp-controller="S01AuthOtpGoogle" asp-action="Index" class="fw-bold text-white text-decoration-none">
@@ -102,14 +209,16 @@
             </div>
         </div>
 
-        <!-- Thanh Header Chính: Logo + Thanh Tìm Kiếm Lớn + Balô Phiếu Mượn (Không có Giỏ hàng mua bán!) -->
+        <!-- Thanh Header Chính: Logo + Thanh Tìm Kiếm Lớn + Balô Phiếu Mượn -->
         <div class="portal-main-bar">
             <div class="container">
                 <div class="row align-items-center g-3">
                     <div class="col-lg-3 col-md-4">
                         <a asp-controller="Home" asp-action="Index" class="portal-logo">
                             <div class="bg-white text-primary rounded-3 d-flex align-items-center justify-content-center shadow-sm" style="width:44px; height:44px;">
-                                <i class="bi bi-book-half fs-3"></i>
+                                <img src="@Url.Content("~/icons/s22-admin/book-open.svg")"
+                                     class="portal-logo-icon"
+                                     alt="BookShare" />
                             </div>
                             <div>
                                 <div class="fs-4 fw-bold lh-1">BookShare</div>
@@ -132,6 +241,7 @@
                                 </button>
                             </div>
                         </form>
+
                         <div class="portal-quick-tags">
                             <a href="/?keyword=Clean+Code">Clean Code</a>
                             <a href="/?keyword=Domain-Driven">Domain-Driven Design</a>
@@ -145,7 +255,9 @@
                     <div class="col-lg-2 col-md-2 text-end">
                         <a asp-controller="S02PersonalShelf" asp-action="Index" class="text-white text-decoration-none d-inline-flex flex-column align-items-center">
                             <div class="position-relative">
-                                <i class="bi bi-journal-bookmark-fill fs-3"></i>
+                                <img src="@Url.Content("~/icons/s22-admin/library.svg")"
+                                     class="portal-shelf-icon"
+                                     alt="" aria-hidden="true" />
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">S02</span>
                             </div>
                             <span style="font-size:0.74rem;" class="fw-semibold">Tủ Sách & Phiếu Mượn</span>
@@ -156,7 +268,7 @@
         </div>
     </header>
 
-    <!-- 2. KHUNG HIỂN THỊ MÃ TRẠNG THÁI KẾ THỪA BOOK-TRACKER-VER07 -->
+    <!-- 2. KHUNG HIỂN THỊ MÃ TRẠNG THÁI -->
     <div class="container mt-3">
         <div id="systemStatusBox" class="status-banner @statusClass">
             <div class="status-banner-left">
@@ -185,7 +297,9 @@
         <div id="aiChatPopup" class="ai-chat-popup shadow-lg d-none">
             <div class="ai-chat-header text-white d-flex justify-content-between align-items-center px-3 py-2">
                 <div class="d-flex align-items-center gap-2">
-                    <i class="bi bi-robot"></i>
+                    <img src="@Url.Content("~/icons/s22-admin/robot.svg")"
+                         class="portal-ai-icon"
+                         alt="" aria-hidden="true" />
                     <div>
                         <strong class="small d-block">Trợ lý AI BookShare (Gemini 2.5)</strong>
                         <span style="font-size: 0.68rem; opacity: 0.85;">RAG: Kết nối trực tiếp SQL Server BookShareDb</span>
